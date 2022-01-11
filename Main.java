@@ -87,27 +87,33 @@ public class Main {
 
     public static void main(String []args) {
 
-        int M[][] = gridBuilder("./files/test/testfile4");
+        if( args.length >= 1 ){
 
 
-        Graph g = new Graph(M);
-
-        g.convertToAdjacency();
-
-        //System.out.println();
-        //g.printMatrix("count");
-
-        //System.out.println();
-        //g.printMatrix("adjacent");
-
-        Algorithms a = new Algorithms();
-
-        a.setGraph(g);
-        int value = a.getShortestPath(g.getSource());
-        //System.out.println("Source: " + ( g.getSource()+1 ) + " Shortest path: " + value);
-        System.out.println(value);
+            int M[][] = gridBuilder(args[0]);
 
 
+            Graph g = new Graph(M);
 
+            g.convertToAdjacency();
+
+            //System.out.println();
+            //g.printMatrix("count");
+
+            //System.out.println();
+            //g.printMatrix("adjacent");
+
+            Algorithms a = new Algorithms();
+
+            a.setGraph(g);
+            int value = a.getShortestPath(g.getSource());
+            //System.out.println("Source: " + ( g.getSource()+1 ) + " Shortest path: " + value);
+            System.out.println(value);
+
+
+
+        }else {
+            printError("Enter a file name as argument.");
+        }
     }
 }
