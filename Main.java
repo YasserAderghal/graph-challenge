@@ -1,4 +1,5 @@
 import java.io.*;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -6,6 +7,16 @@ import java.util.stream.Collectors;
 
 public class Main {
 
+    public static final Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+
+    // printing errors
+    private static void printError(String error) {
+        System.out.println("[" + timestamp + "] " + error);
+    }
+
+
+    //
     public static List<String> ReadFile(String filename) {
         Vector<String> maze = new Vector<String>();
 
@@ -18,8 +29,10 @@ public class Main {
             }
             myReader.close();
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred.");
-            e.printStackTrace();
+            printError("Error in reading file.");
+            printError("Program will exit.");
+            System.exit(1);
+            //e.printStackTrace();
         }
 
 
@@ -29,10 +42,11 @@ public class Main {
 
     public static int[][] gridBuilder(String filename) {
 
+        printError(filename);
         List<String> maze = ReadFile(filename);
         Vector<Integer> size = new Vector< Integer> (); 
 
-        Arrays.asList( maze.remove(0).split(" ")).forEach(e -> size.add( Integer.parseInt(e) ));
+        Arrays.asList( maze.remove(0).split("\\s+")).forEach(e -> size.add( Integer.parseInt(e) ));
 
 
 
@@ -42,7 +56,7 @@ public class Main {
             Vector<String> tempLine = new Vector<>();
 
             // split the string + convert it to intger + add to vector of integers
-            Arrays.asList( e.split(" ") ).forEach( k -> tempLine.add( k ));
+            Arrays.asList( e.split("\\s+") ).forEach( k -> tempLine.add( k ));
 
             gridTemp.add(tempLine);
 
@@ -51,7 +65,10 @@ public class Main {
 
         // check if the size is correct
         if( gridTemp.size() != size.elementAt(0) ||  gridTemp.stream().filter( e -> e.size() != size.elementAt(1) ).collect(Collectors.toList()).size() > 0  ){
-            return new int[0][0]; 
+
+            printError("Error in size compatibilty , please use correct size");
+            printError("The program will exit now");
+            System.exit(0);
         }
 
 
@@ -67,11 +84,56 @@ public class Main {
         return grid;
     }
 
+
+    private  static void testProgram(){
+        int M1[][] = gridBuilder("./files/test/testfile1");
+        int M2[][] = gridBuilder("./files/test/testfile2");
+        int M3[][] = gridBuilder("./files/test/testfile3");
+        int M4[][] = gridBuilder("./files/test/testfile4");
+
+        int matrix[][][] = {M1,M2,M3,M4};
+
+        for(int i = 0; i <4 ; i++) {
+            Graph g = new Graph(matrix[i]); 
+            Algorithms a = new Algorithms();
+
+            g.convertToAdjacency();
+
+            a.setGraph(g);
+            int value = a.getShortestPath(g.getSource());
+
+
+            System.out.println(value);
+            
+
+
+        }
+
+
+
+    }
+
     public static void main(String []args) {
 
-        int M[][] = gridBuilder("file");
+        int M[][] = gridBuilder("./files/test/testfile4");
 
 
+        Graph g = new Graph(M);
+
+        g.convertToAdjacency();
+
+        //System.out.println();
+        //g.printMatrix("count");
+
+        //System.out.println();
+        //g.printMatrix("adjacent");
+
+        Algorithms a = new Algorithms();
+
+        a.setGraph(g);
+        int value = a.getShortestPath(g.getSource());
+        System.out.println("Source: " + ( g.getSource()+1 ) + " Shortest path: " + value);
+        //System.out.println(value);
 
 
 

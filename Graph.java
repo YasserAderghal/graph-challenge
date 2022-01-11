@@ -2,6 +2,7 @@
 import java.util.*;
 
 public class Graph {
+    private int source;
     private int vertices;
 
     private int matrix[][];
@@ -68,7 +69,7 @@ public class Graph {
         for (int j = 0 ; j< copyMatrix.length ;j++) {
             System.out.print(j+1 + "\t");
             for(int i = 0; i< copyMatrix[0].length ; i++)
-                System.out.print(copyMatrix[j][i] + "  ");
+                System.out.print(copyMatrix[j][i] + " ");
 
             System.out.println();
         }
@@ -92,8 +93,12 @@ public class Graph {
         // trying to identify every free cell 
         for( int i = 0; i < A.length; i++ ){
             for (int j = 0 ; j< A[0].length ; j++) {
-                if( A[i][j] == 0 || A[i][j] == 2 )
+                if( A[i][j] == 0 || A[i][j] == 2 ){
                     counted_matrix[i][j] = ++count;
+                    if( A[i][j] == 2  )
+                        this.source = count - 1 ;
+                }
+
             }
         }
 
@@ -185,5 +190,8 @@ public class Graph {
         return this.gridEdges;
     }
 
+    public int getSource() {
+        return this.source;
+    }
 
 }

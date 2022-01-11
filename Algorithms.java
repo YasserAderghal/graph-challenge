@@ -89,13 +89,10 @@ public class Algorithms {
         Set<Integer> gridEdges = graph.getGridEdges();
         int value = Integer.MAX_VALUE;
 
-        System.out.println(gridEdges);
 
         int[] distances = dijkstra_GetMinDistances(sourceVertex);
 
 
-        for(int i =0; i< distances.length ; i++)
-        System.out.println((i+1) + " -> " +distances[i]);
 
         for(Integer e : gridEdges){
 
