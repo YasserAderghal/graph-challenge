@@ -42,7 +42,6 @@ public class Main {
 
     public static int[][] gridBuilder(String filename) {
 
-        printError(filename);
         List<String> maze = ReadFile(filename);
         Vector<Integer> size = new Vector< Integer> (); 
 
@@ -85,33 +84,6 @@ public class Main {
     }
 
 
-    private  static void testProgram(){
-        int M1[][] = gridBuilder("./files/test/testfile1");
-        int M2[][] = gridBuilder("./files/test/testfile2");
-        int M3[][] = gridBuilder("./files/test/testfile3");
-        int M4[][] = gridBuilder("./files/test/testfile4");
-
-        int matrix[][][] = {M1,M2,M3,M4};
-
-        for(int i = 0; i <4 ; i++) {
-            Graph g = new Graph(matrix[i]); 
-            Algorithms a = new Algorithms();
-
-            g.convertToAdjacency();
-
-            a.setGraph(g);
-            int value = a.getShortestPath(g.getSource());
-
-
-            System.out.println(value);
-            
-
-
-        }
-
-
-
-    }
 
     public static void main(String []args) {
 
@@ -132,8 +104,8 @@ public class Main {
 
         a.setGraph(g);
         int value = a.getShortestPath(g.getSource());
-        System.out.println("Source: " + ( g.getSource()+1 ) + " Shortest path: " + value);
-        //System.out.println(value);
+        //System.out.println("Source: " + ( g.getSource()+1 ) + " Shortest path: " + value);
+        System.out.println(value);
 
 
 
