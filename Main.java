@@ -10,13 +10,22 @@ public class Main {
     public static final Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
 
-    // printing errors
+    /**
+    * This function print errors with timestamp
+    * @param String     The content of the error
+    *
+    * */
     private static void printError(String error) {
         System.out.println("[" + timestamp + "] " + error);
     }
 
 
-    //
+    /**
+    *   This function read every line of a given file, if any error occurs the program exit
+    *
+    *   @param      String   file path to be read
+    *   @return     List of string
+    * */
     public static List<String> ReadFile(String filename) {
         Vector<String> maze = new Vector<String>();
 
@@ -40,6 +49,13 @@ public class Main {
         return  maze.stream().filter(e -> !e.isBlank()).collect(Collectors.toList());
     }
 
+    /**
+    *   This function Read file and turn the file into a grid "if the file is well organized other wise it will rise an error"
+    *   </p>
+    *   The file contains a grid of 1 and 0 : 1 represent cells that contains plant and 0 free cells "where we cna walk" . 2 is the source.
+    *   @param  String take filename as argument
+    *   @return int[][] return a matrix
+    * */
     public static int[][] gridBuilder(String filename) {
 
         List<String> maze = ReadFile(filename);

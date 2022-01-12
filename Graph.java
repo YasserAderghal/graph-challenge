@@ -83,7 +83,7 @@ public class Graph {
 
     }
 
-    // This function take the maze grid as an argument and return adjacent matrix 
+    // This function take the maze grid from attributes and make 1) Counted matrix , 2) adjacent matrix . 
     public void convertToAdjacency() {
         int[][] A = this.grid;
         int count = 0;
@@ -102,12 +102,6 @@ public class Graph {
             }
         }
 
-
-
-
-
-
-
         // now we are working on adjacent matrix
         int[][] MA = new int[count][count];
 
@@ -123,8 +117,6 @@ public class Graph {
                     // check next row element
                     if( counted_matrix[i][j+1] > 0 )
                         MA[ counted_matrix[i][j]-1  ] [ counted_matrix[i][j+1]-1 ] = 1;
-                    
-
 
 
                     // check next column element
