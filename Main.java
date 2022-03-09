@@ -111,7 +111,10 @@ public class Main {
 
             Graph g = new Graph(M);
 
-            g.convertToAdjacency();
+            if( g.convertToAdjacency()){
+                printError("Please check the source vertex, it must be marked 2.");
+                System.exit(1);
+            }
 
             //System.out.println();
             //g.printMatrix("count");

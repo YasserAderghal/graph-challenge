@@ -24,6 +24,13 @@ public class Algorithms {
         return vertex;
     }
 
+    /*
+    *   a simple implementation of general dijkstra
+    *   @param  int     source vertex
+    *   @return int[]   map the distances ==> distance_from_source[vertex_of_target]
+    *
+    * */
+
 
     private int[] dijkstra_GetMinDistances(int sourceVertex){
         int[][] matrix = graph.getAdjacentMatrix();
@@ -77,17 +84,23 @@ public class Algorithms {
             }
         }
 
-        // map the distances
+        // map the distances ==> distance_from_source[vertex_of_target]
         // Key : vertex
         // Value : distance from source vertex
         return distance;
     }
 
+    /*
+    *   This function run the general dijsktra algorithm and  return for shortest path to the edge of the grid if it exists .
+    *   @param      int         source node
+    *   @return     int         value of the shortest path otherwise infinity, java max integer
+    *   
+    *   */
     public int getShortestPath(int sourceVertex){
 
         // subtraction of one so it can match distances list 
         Set<Integer> gridEdges = graph.getGridEdges();
-        int value = Integer.MAX_VALUE;
+        int value = Integer.MAX_VALUE; 
 
 
         int[] distances = dijkstra_GetMinDistances(sourceVertex);
@@ -100,16 +113,11 @@ public class Algorithms {
                 value = distances[ e.intValue() -1 ];
         }
         
+        if ( value == Integer.MAX_VALUE )
+            return -1;
 
         return value;
     }
 
-    public void printDijkstra(int sourceVertex, int [] key){
-        System.out.println("Dijkstra Algorithm: (Adjacency Matrix)");
-        for (int i = 0; i <graph.getAdjacentMatrix().length ; i++) {
-            System.out.println("Source Vertex: " + (sourceVertex +1)+ " to vertex " +   + (i+1) +
-                    " distance: " + key[i]);
-        }
-    }
 
 }
